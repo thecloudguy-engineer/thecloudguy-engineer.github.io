@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Javascript test</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script language="javascript" type="text/javascript" src="liveonmars_abi.js"></script>
+</head>
+<body>
+    <button id="connectButton">Connect</button>
+
+    <div id="poll">
+        <p id="question"></p>
+        <p id="yesCount"></p>
+        <p id="noCount"></p>
+        
+        <input type="radio" name="yes_no" id="yes" value="yes">
+        <label for="yes">Yes</label>
+
+        <input type="radio" name="yes_no" id="no" value="no">
+        <label for="no">No</label>
+
+    </div>
+
+    <button id="executeButton">Cast your vote</button>
+    <script>
+       
+        
+        const button = document.querySelector('#connectButton');
+        button.addEventListener('click', connect);
+
+        const executeButton = document.querySelector('#executeButton');
+        executeButton.addEventListener('click', execute);
+
+        const contractAddress = '0xbc8363b57c903e3af85edad2e97c643b20135802';
+        const abi = liveOnMarsABI;
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+
+        const yesC = document.querySelector('#yesCount');
+        const noC = document.querySelector('#noCount');
+        const q = document.querySelector('#question'); 
+
+        async function connect(){
+            if (typeof window.ethereum !== 'undefined'){
+                console.log("We see metamask");
+                ethereum.request({method: "eth_requestAccounts"});
+                button.textContent = 'Connected';
+            }
+        }
+
+        async function loadVariables(){
+            try {
+                const yesCount = await contract.yesCount();
+                const noCount = await contract.noCount();
+                const question = await contract.question();     
+                
+                yesC.textContent = yesCount+ ' ';
+                noC.textContent = noCount+ ' ';
+                q.textContent = question + ' '; 
+
+            } catch (error) {
+                console.log(error);
+                
+            }
+        }
+        
+        loadVariables();
+
+    
+            
+     
+
+        async function execute(){
+            const yesRadio = document.querySelector('#yes');
+            const noRadio = document.querySelector('#no');
+
+            if (yesRadio.checked){
+                contract.recordVote(true);
+            } else{
+                contract.recordVote(false);
+            }
+        }
+
+        loadVariables();
+        
+        
+
+    </script>
+   
+</body>
+</html>

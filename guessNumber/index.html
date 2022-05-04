@@ -12,24 +12,30 @@
     <div class="relative flex min-h-screen flex-col justify-center bg-gradient-to-r from-rose-100 to-teal-100">
         <div class="mx-auto flex w-140 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60">
 
-            <div class="p-4">
+            <div class="p-8">
                 <h1 class="text-2xl font-medium text-slate-600 pb-2">Number Guessing Game</h1>
 
-                <p class="text-sm tracking-tight font-light text-slate-400 leading-6 pb-2">We have selected a random number between 1 and 100. Can you guess it in 10 turns? We will tell you if your guess is high or low</p>
+                <p class="text-sm tracking-tight font-light text-slate-400 leading-6 pb-2">We have selected a random
+                    number between 1 and 100. Can you guess it in 10 turns? We will tell you if your guess is high or
+                    low</p>
+            </div>
 
-                <div class="form">
-                    <label for="guessField">Enter a guess: </label>
-                    <input type="text" id="guessField" class="guessField pb-2 bg-orange-50 hover:bg-orange-300 w-40 rounded">
-                    <input type="submit" value="Submit your guess" class="guessSubmit p-2 bg-green-400 hover:bg-green-500 w-40 rounded-lg shadow text-sm font-light justify-center uppercase text-white pb-2">
-                </div>
+            <div class="form p-8">
+                <label for="guessField">Enter a guess: </label>
+                <input type="text" id="guessField"
+                    class="guessField pb-2 bg-orange-50 hover:bg-orange-300 w-40 rounded">
+                <input type="submit" value="Submit your guess"
+                    class="guessSubmit p-2 bg-green-400 hover:bg-green-500 w-40 rounded-lg shadow text-sm font-light justify-center uppercase text-white pb-2">
+            </div>
 
-                <div class="resultParas">
-                    <p class="guesses pb-2"></p>
-                    <p class="lastResult pb-2"></p>
-                    <p class="lowOrHigh pb-2"></p>
-                    <button id="resetButton" class="invisible bg-green-400 hover:bg-green-500 w-40 rounded-lg shadow text-sm font-light justify-center uppercase text-white pb-2 " >Start a new game</button>
-                </div>
 
+            <div class="resultParas p-8">
+                <p class="guesses pb-2"></p>
+                <p class="lastResult pb-2"></p>
+                <p class="lowOrHigh pb-2"></p>
+                <button id="resetButton"
+                    class="invisible bg-green-400 hover:bg-green-500 w-40 rounded-lg shadow text-sm font-light justify-center uppercase text-white pb-4 ">Start
+                    a new game</button>
             </div>
 
 
@@ -41,8 +47,8 @@
 
 
     <script src="index.js">
-       
+
     </script>
 </body>
 
-</html>
+</html> 

@@ -1,7 +1,7 @@
 var storeABI = [
     {
         "inputs": [],
-        "name": "retrieve",
+        "name": "favoriteNumber",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -16,7 +16,7 @@ var storeABI = [
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "num",
+                "name": "_favoriteNumber",
                 "type": "uint256"
             }
         ],

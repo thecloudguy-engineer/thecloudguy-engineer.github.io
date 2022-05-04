@@ -3,97 +3,65 @@
 
 <head>
     <title>A simple dapp to store and call your value</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="output.css">
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-    <script language="javascript" type="text/javascript" src="newstore_abi.js"></script>
+    <script language="javascript" type="text/javascript" src="store_abi.js"></script>
 </head>
 
 <body>
-    <a href="../index.html">Home page</a>
-    <h2>Enter a number here and click Set number and get your number gy clicking get Number </h2>
-    <button id="connectButton">Connect</button>
 
-    <button id="get">Get Number</button>
+    <div class="relative flex flex-col justify-center bg-gradient-to-r from-green-300 to-orange-400 min-h-screen">
+        <div class="mx-auto flex flex-col justify-center rounded-2xl w-140 bg-white shadow-xl shadow-slate-300/60 ">
 
-    <div id="result">
-        <p id="getNumber"></p>
+
+            <div class="p-4 grid grid-cols-2">
+                <div>
+                    <a href="../index.html" class="hover:bg-green-300">Home page</a>
+                </div>
+                <div>
+                    <button id="connectButton"
+                        class="bg-sky-500 w-1/2 rounded-lg shadow text-sm font-light justify-end uppercase text-white">Connect</button>
+                </div>
+
+            </div>
+
+            <div class="p-4">
+
+                <p class="text-sm font-light text-slate-600">Get the current number on the Ethereum rinkeby
+                    blockchain </h2>
+                <div class="grid grid-cols-2">
+                    <div>
+                        <button id="get"
+                            class="bg-sky-500 w-1/2 rounded-lg shadow text-sm font-light justify-end uppercase text-white">Get
+                            Number</button>
+                    </div>
+
+                    <div id="result">
+                        <p id="getNumber"></p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form p-4">
+                <label for="numField" class="pb-2 text-sm font-light text-slate-600">Enter a number you want to store on the blockchain: </label>
+                <input type="text" name="takeNumber" id="takeNumber" class="pb-2 bg-orange-50 hover:bg-orange-300 w-40 rounded">
+                <p id="setNumber"></p>
+                <button id="set" class="bg-sky-500 w-1/4 rounded-lg shadow text-sm font-light justify-end uppercase text-white">Set Number</button>
+            </div>
+
+        </div>
+
     </div>
-    <div class="form">
-        <label for="numField">Enter a number you want to store on the blockchain: </label>
-        <input type="text" name="takeNumber" id="takeNumber">
-        <p id="setNumber"></p>
-        <button id="set">Set Number</button>
-    </div>
-
-
-    <script>
-        const myNum = document.getElementById('takeNumber');
-
-        const connectButton = document.querySelector('#connectButton');
-        connectButton.addEventListener('click', connect);
-
-        const setButton = document.querySelector('#set');
-        setButton.addEventListener('click', set);
-
-        const getButton = document.querySelector('#get');
-        getButton.addEventListener('click', get);
-
-        const getNumber = document.getElementById('getNumber');
-        const setNumber = document.getElementById('setNumber');
-
-        //  const contractAddress = '0xb97295dec47914a81c80c6007e6cd8daa2af8326';
-        const contractAddress = '0xaa493310e851d77e1bf565fefa9643db8170a92a';
-        //  const abi = storeABI;
-        const abi = newStoreABI;
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-
-        const contract = new ethers.Contract(contractAddress, abi, signer);
 
 
 
 
-        async function connect() {
-            if (typeof window.ethereum !== 'undefined') {
-                console.log("We see metamask");
-                ethereum.request({ method: "eth_requestAccounts" });
-                connectButton.textContent = 'Connected';
-            }
-        }
+    <script src="store.js">
 
-        async function get() {
-            try {
-                const getNum = await contract.favoriteNumber();
-                console.log(getNum);
-
-                getNumber.textContent = 'My Number is: ' + getNum;
-
-            } catch (error) {
-                console.log(error)
-
-            }
-        }
-
-        get();
-
-
-        async function set() {
-            try {
-
-                const setNum = await contract.store(Number(myNum.value));
-                await setNum.wait();
-                const newNum = await contract.favoriteNumber();
-                setNumber.textContent = 'My Number is: ' + newNum;
-
-            } catch (error) {
-                console.log(error);
-
-            }
-
-        }
     </script>
 
 
